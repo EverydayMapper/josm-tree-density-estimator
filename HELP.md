@@ -3,7 +3,9 @@
 ## Environment
 - **Author:** EverydayMapper (OSM Contributor)
 - **Primary OS:** macOS 26.2 (Tested)
-- **Other OS:** Windows/Linux (Untested)
+- **JOSM Version:** 19439
+- **Java Version:** 21.0.8 (LTS)
+- **Other OS/Versions:** Untested
 - **Engine:** Jython (Python for Java)
 
 ## Dependencies
