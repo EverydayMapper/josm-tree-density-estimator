@@ -17,7 +17,8 @@ This script is not a standalone JOSM plugin yet. It requires the **JOSM Scriptin
 ## How to Run
 1. Install the Scripting Plugin in JOSM.
 2. Open the Scripting Console (**Windows -> Scripting Console**).
-3. Load and run `vegetation_analyzer.py`.
+3. Select a closed way or the **relation** for multipolygons.
+4. Load and run `tree_density_estimator.py`.
 
 ## Known Limitations
 This is a **prerelease** tool provided for community testing. It relies on statistical extrapolation and is most accurate in "Open" or "Scattered" vegetation where individual crowns are visible from satellite imagery.
