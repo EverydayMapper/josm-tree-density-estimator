@@ -1,5 +1,12 @@
 # Release Notes
 
+## [1.2.2] - 2026-01-04
+### Fixed
+- **Mouse Event Ghosting:** Resolved a rare but annoying bug where the cursor would remain stuck in "selection mode" (red line following cursor) after releasing the mouse button. Fixed by forcing a UI focus reset (`requestFocusInWindow`) and immediate state clearing in the `mouseReleased` event.
+
+### Changed
+- **Documentation:** Updated the internal HOW-TO guide to include the Esri World Imagery Wayback (Living Atlas) workflow for retrieving precise imagery capture dates.
+
 ## [1.2.1] - 2026-01-04
 ### Fixed
 - **Source Layer Detection:** Replaced keyword-based filtering ("Imagery"/"Satellite") with a visibility-check logic. The script now correctly identifies Bing, Mapbox, and local WMS layers as the source.
