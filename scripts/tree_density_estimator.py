@@ -1,6 +1,6 @@
 # ==============================================================================
 # Tree Density Estimator
-# Version: 1.2.1
+# Version: 1.2.2
 # Date: 2026-01-04
 # Author: EverydayMapper (OSM)
 # License: MIT
@@ -9,11 +9,10 @@
 # A statistical sampling tool for JOSM to estimate tree/scrub density and canopy 
 # cover. Supports Closed Ways and Multipolygon Relations.
 #
-# NEW IN V1.2.1:
-# - Improved Source Detection: Correctly identifies Bing, Mapbox, and local 
-#   layers by checking visibility rather than keyword filters.
-# - Metadata: Standardized 'source' tag: [Imagery] ([Date]); tree_density_estimator
-# - Integrity: Added 'est:source_area' to help detect geometry-related bias.
+# NEW IN V1.2.2:
+# - FIXED: Mouse event "ghosting" bug. Added UI focus reset and state-clearing
+#   in mouseReleased to prevent the "red line following cursor" issue.
+# - RETAINED: All Smart Suggestion logic and Multipolygon area integrity.
 # ==============================================================================
 
 import math
@@ -49,22 +48,13 @@ def run_analyzer():
         JOptionPane.showMessageDialog(None, "Invalid area geometry.")
         return
 
-    # 2. Metadata & Imagery Source (FIXED V1.2.1)
-    # We default to "Imagery" only if nothing else is found.
+    # 2. Metadata & Imagery Source
     active_layer_name = "Imagery"
-    
-    # Iterate through all layers to find the visible background (non-data) layer
     for l in MainApplication.getLayerManager().getLayers():
-        # Skip the layer we are currently editing (Data Layer)
-        if isinstance(l, OsmDataLayer):
-            continue
-        # If the layer is visible, we assume it is the source
+        if isinstance(l, OsmDataLayer): continue
         if l.isVisible():
             active_layer_name = l.getName()
-            # We don't break here; if multiple are visible, usually the top-most 
-            # (last in list) is the one the user sees.
             
-    # Updated Date Prompt Logic
     date_prompt_msg = ("Date of Imagery (Optional)\n\n"
                        "Enter the capture date (YYYY-MM-DD) if known.\n"
                        "Leave blank if unknown.\n\n"
@@ -73,11 +63,8 @@ def run_analyzer():
     img_date = JOptionPane.showInputDialog(None, date_prompt_msg, 
                                            "Imagery Metadata", JOptionPane.QUESTION_MESSAGE)
     
-    # Graceful exit if Cancel is clicked
-    if img_date is None:
-        return
+    if img_date is None: return
     
-    # Updated Source Tag Standard
     if img_date and img_date.strip():
         imagery_source = "{} ({}); tree_density_estimator".format(active_layer_name, img_date.strip())
     else:
@@ -116,11 +103,19 @@ def run_analyzer():
             if not self.start_p: return
             end_p = mv.getLatLon(e.getX(), e.getY())
             
+            # --- FIX: GHOSTING PREVENTION ---
+            # We cache the current start point, then clear it immediately 
+            # to break the JOSM drag-loop before triggering the dialog.
+            p1 = self.start_p
+            self.start_p = None
+            mv.requestFocusInWindow()
+            # --------------------------------
+
             if self.step == "DRAW_BOX":
-                dist = self.start_p.greatCircleDistance(end_p)
+                dist = p1.greatCircleDistance(end_p)
                 if dist < 1.0: return 
-                n1 = Node(self.start_p); n2 = Node(LatLon(self.start_p.lat(), end_p.lon()))
-                n3 = Node(end_p); n4 = Node(LatLon(end_p.lat(), self.start_p.lon()))
+                n1 = Node(p1); n2 = Node(LatLon(p1.lat(), end_p.lon()))
+                n3 = Node(end_p); n4 = Node(LatLon(end_p.lat(), p1.lon()))
                 self.sample_way = Way()
                 self.sample_way.setNodes([n1, n2, n3, n4, n1])
                 layer.data.addPrimitive(n1); layer.data.addPrimitive(n2); layer.data.addPrimitive(n3); layer.data.addPrimitive(n4); layer.data.addPrimitive(self.sample_way)
@@ -136,19 +131,17 @@ def run_analyzer():
                 JOptionPane.showMessageDialog(None, msg)
                 
                 self.step = "CALIBRATE"
-                self.start_p = None
                 self.update_status("Drag across a {} crown, then ENTER.".format(singular))
 
             elif self.step == "CALIBRATE":
-                dist = self.start_p.greatCircleDistance(end_p)
+                dist = p1.greatCircleDistance(end_p)
                 if dist > 0.05:
                     self.diameters.append(dist)
                     self.avg_diameter = sum(self.diameters) / len(self.diameters)
                     self.update_status("Last: {:.2f}m | Avg: {:.2f}m (n={}) | ENTER".format(dist, self.avg_diameter, len(self.diameters)))
-                    l1 = Node(self.start_p); l2 = Node(end_p); line = Way(); line.setNodes([l1, l2])
+                    l1 = Node(p1); l2 = Node(end_p); line = Way(); line.setNodes([l1, l2])
                     layer.data.addPrimitive(l1); layer.data.addPrimitive(l2); layer.data.addPrimitive(line)
                     self.temp_lines.append((line, l1, l2))
-                self.start_p = None
 
         def mouseClicked(self, e):
             if self.step == "COUNTING" and e.isShiftDown():
@@ -206,7 +199,6 @@ def run_analyzer():
                     target.put("est:avg_{}".format(tag_suffix), "{:.1f}m".format(tool.avg_diameter))
                     target.put("est:avg_spacing", "{:.1f}m".format(avg_spacing))
                     
-                    # Added est:source_area in V1.2.1
                     target.put("est:source_area", str(round(total_area, 1)))
                     target.put("source", imagery_source)
                     
