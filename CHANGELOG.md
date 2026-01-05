@@ -1,5 +1,9 @@
 # Release Notes
 
+## [1.2.6] - 2026-01-05
+### Fixed
+- **Status Line Crash:** Resolved an `AttributeError` when the script finished. JOSM's API does not allow reading text from the status bar via `getHelpText()`, so the script now unconditionally clears the status line without checking it first.
+
 ## [1.2.5] - 2026-01-05
 ### Fixed
 - **Cancel Behavior:** In the Smart Suggestion prompt, clicking "Cancel" now correctly aborts the entire script without applying any tags. Previously, it behaved like "No," saving the statistics but not changing the primary tag.
