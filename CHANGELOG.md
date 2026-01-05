@@ -1,5 +1,9 @@
 # Release Notes
 
+## [1.2.4] - 2026-01-05
+### Fixed
+- **Critical Trackpad Bug:** Fixed the "red line ghosting" issue where the selection tool remained active after drawing the sample box. This was caused by the dialog pop-up blocking the mouse release event. All dialogs in the event loop are now wrapped in `SwingUtilities.invokeLater` to ensure JOSM processes the input cleanly before showing messages.
+
 ## [1.2.3] - 2026-01-05
 ### Changed
 - **Refined Smart Suggestions:** The script now respects "Silent Mapping" for specialized areas. Suggestions to switch between `scrub` and `wood` only trigger if those specific tags (or `landuse=forest`) are present. This prevents the script from incorrectly suggesting a tag change for surveys performed on `grassland`, `heath`, or `wetland`.
