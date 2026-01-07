@@ -1,5 +1,11 @@
 # Release Notes
 
+## [1.4.1] - 2026-01-07
+### Fixed
+- **Area Accuracy:** The script now physically moves the sample box corners to match the rounded dimensions (nearest 0.5m) exactly. This guarantees the area calculation matches the visual label (e.g., 100m × 50m = 5000m²).
+- **Decimal Precision:** Tree diameters and averages in the log and display are now strictly limited to one decimal place (e.g., 12.1m instead of 12.14m).
+- **Message Restoration:** The "ANALYSIS COMPLETE" summary dialog has been restored to its full original text.
+
 ## [1.4.0] - 2026-01-07
 ### Added
 - **Survey Logging:** New option to export a detailed text file at the end of the process. 
