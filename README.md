@@ -65,17 +65,17 @@ After the script finishes, it is good practice to compare the `est:source_area` 
 * If the polygon geometry is modified later, these values will drift.
 * Periodically cross-referencing these ensures the density data remains linked to the correct spatial extent.
 
-### 📝 Logging & Data Export
+## Limitations
+
+This tool is most accurate in "Open" to "Dense" areas where individual crowns are visible. It is not recommended for closed-canopy forests where the ground is invisible, as visual counting becomes guesswork.
+
+## Logging & Data Export
 As of v1.4.0, the tool allows you to save a local survey log for your records. After applying tags, you will be prompted to save a `.txt` file containing:
 * **Survey Metadata:** Date, Imagery Source, OSM Way ID.
 * **Applied Tags:** The exact key/value pairs added to the map.
 * **Raw Data Appendix:** * Exact GPS coordinates of your sample box corners.
     * Start and End coordinates for every diameter measurement.
     * Coordinates for every individual tree counted.
-
-## Limitations
-
-This tool is most accurate in "Open" to "Dense" areas where individual crowns are visible. It is not recommended for closed-canopy forests where the ground is invisible, as visual counting becomes guesswork.
 
 ---
 *Mapping with nuance. Join the effort to move beyond the green blob.*
