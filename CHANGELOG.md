@@ -1,5 +1,11 @@
 # Release Notes
 
+## [1.4.2] - 2026-01-07
+### Changed
+- **Logic Fix:** The sample area calculation now ignores spherical geodesic distortion. It strictly calculates area as `Width * Height` based on the user's rounded box dimensions (e.g., 100.0m * 60.0m = 6000.0m²).
+- **UI:** Restored "Avg Spacing" to the final summary dialog.
+- **UI:** Reverted the "Analysis Complete" summary dialog to its full, detailed format.
+
 ## [1.4.1] - 2026-01-07
 ### Fixed
 - **Area Accuracy:** The script now physically moves the sample box corners to match the rounded dimensions (nearest 0.5m) exactly. This guarantees the area calculation matches the visual label (e.g., 100m × 50m = 5000m²).
