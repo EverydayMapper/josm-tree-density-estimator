@@ -1,5 +1,13 @@
 # Release Notes
 
+## [1.4.3] - 2026-01-07
+### Restored
+- **Smart Suggestion** logic for natural=wood vs natural=scrub.
+
+### Changed
+- **Logging:** The log file now records if a "Smart Suggestion" was accepted.
+- **UI:** Integrated the confirmation dialogs before the final save.
+
 ## [1.4.2] - 2026-01-07
 ### Changed
 - **Logic Fix:** The sample area calculation now ignores spherical geodesic distortion. It strictly calculates area as `Width * Height` based on the user's rounded box dimensions (e.g., 100.0m * 60.0m = 6000.0m²).
