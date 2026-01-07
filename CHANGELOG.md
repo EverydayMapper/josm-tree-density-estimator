@@ -1,5 +1,27 @@
 # Release Notes
 
+## [1.4.0] - 2026-01-07
+### Added
+- **Survey Logging:** New option to export a detailed text file at the end of the process. 
+  - Includes metadata (Date, OSM ID, Script Version).
+  - Lists all tags applied to the OSM object.
+  - **Appendix:** Contains raw coordinates for the sample box corners, start/end points of every calibration measurement, and coordinates for every tree counted.
+- **Console Feedback:** Restored the live dimension readout (e.g., "Drawing Sample Box: 10.5m x 15.0m") in the JOSM status bar during the drawing phase.
+
+### Changed
+- **Rounding Logic:** - Sample Area dimensions now strictly round to the nearest **0.5 meters** (e.g., 10.0m, 10.5m) to reflect the approximate nature of the sampling box.
+  - Tree calibration measurements remain precise to the decimal (e.g., 12.3m) for accurate density calculations.
+
+## [1.3.3] - 2026-01-07
+### Changed
+- **Persistent Labels:** The sample area dimensions (e.g., "10.5m x 12.0m") now stay visible on the map after you finish drawing the box. They will only be deleted once you finish the next step (Calibration).
+- **Half-Meter Rounding:** The sample area width and height now round to the nearest 0.5m.
+- **Precision Maintenance:** Tree diameters remain rounded to the decimal point for accuracy.
+
+## [1.3.2] - 2026-01-07
+### Fixed
+- **Visual Fix:** Added 'natural=tree' to counters and 'place=point' to labels to force JOSM to render the text/icons on standard map styles.
+
 ## [1.3.1] - 2026-01-07
 ### Fixed
 - **BUGFIX:** Removed invalid API call 'fireSelectionChanged' that caused crash during drag.
