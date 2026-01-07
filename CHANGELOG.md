@@ -1,5 +1,20 @@
 # Release Notes
 
+## [1.3.1] - 2026-01-07
+### Fixed
+- **BUGFIX:** Removed invalid API call 'fireSelectionChanged' that caused crash during drag.
+- **Live Drage:** Box and Diameter lines update in real-time.
+
+### Changed
+- **HUD:** Live dimensions plotted directly on the map.
+
+## [1.3.0] - 2026-01-07
+### Changes
+- **HUD (Head-Up Display):** Live dimensions plotted directly on the map.
+- **Live Drag:** Box and Diameter lines update in real-time while dragging.
+- **Visual Counting:** Number counters appear next to trees while counting.
+- **Rounding:** Distances displayed rounded to 1 decimal place (0.1m).
+
 ## [1.2.6] - 2026-01-05
 ### Fixed
 - **Status Line Crash:** Resolved an `AttributeError` when the script finished. JOSM's API does not allow reading text from the status bar via `getHelpText()`, so the script now unconditionally clears the status line without checking it first.
