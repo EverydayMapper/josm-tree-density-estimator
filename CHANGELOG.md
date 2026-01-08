@@ -1,5 +1,19 @@
 # Release Notes
 
+## [1.4.4] - 2026-01-08
+
+### Added
+- **Contextual Visualization:** Temporary counting nodes now use `natural=shrub` markers when counting Bushes or Heathland Plants, providing a more appropriate visual scale in JOSM compared to the default tree icon.
+- **Enhanced Metadata:** Added `Surveyed Type` to the log file output to record the original tagging (`natural=*` or `landuse=*`) of the object before any suggested changes.
+
+### Changed
+- **Log Formatting:** Reverted log header style to the v1.4.2 "boxed" design for better scannability.
+- **Filename Convention:** Standardized exported logs to `TreeSurvey_{OSM_ID}_{TIMESTAMP}.txt`.
+- **UI Branding:** Updated JOSM status bar and script headers to reflect version 1.4.4.
+
+### Fixed
+- Improved logic for "Smart Suggestions" to ensure proper comparison between current tags and calculated density classes.
+
 ## [1.4.3] - 2026-01-07
 ### Restored
 - **Smart Suggestion** logic for natural=wood vs natural=scrub.
