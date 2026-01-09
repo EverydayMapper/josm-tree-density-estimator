@@ -1,13 +1,16 @@
 # ==============================================================================
 # Tree Density Estimator
-# Version: 1.4.5
+# Version: 1.0.0 (Official Release)
 # Date: 2026-01-09
 # Author: EverydayMapper (OSM)
 # License: MIT
-# 
-# UPDATE v1.4.5:
-# - FIXED: Restored the "Missing Imagery" check. The script now warns the user
-#   if no background imagery layer is detected before starting the survey.
+#
+# A JOSM script for statistical sampling and extrapolation of vegetation 
+# density. Calculates canopy %, stem counts, and FAO wood:density classes.
+#
+# REQUIREMENTS:
+# - JOSM Scripting Plugin
+# - Jython Standalone v2.7.4
 # ==============================================================================
 
 import math
@@ -49,7 +52,7 @@ def run_analyzer():
     target_id = target.getId()
     target_type = "Way" if isinstance(target, Way) else "Relation"
 
-    # --- IMAGERY DETECTION & CHECK (FIXED v1.4.5) ---
+    # --- IMAGERY DETECTION & CHECK ---
     active_layer_name = None
     for l in MainApplication.getLayerManager().getLayers():
         if isinstance(l, OsmDataLayer): continue
@@ -94,7 +97,7 @@ def run_analyzer():
             self.log_calibration_data = [] 
 
         def update_status(self, message):
-            MainApplication.getMap().statusLine.setHelpText("[v1.4.5] " + message)
+            MainApplication.getMap().statusLine.setHelpText("[v1.0.0] " + message)
 
         def get_label_node(self, latlon, text):
             if self.label_node is None:
@@ -242,7 +245,7 @@ def run_analyzer():
                         
                         log = "=========================================================================\n"
                         log += " TREE DENSITY SURVEY LOG\n"
-                        log += " Script: Tree Density Estimator v1.4.5\n"
+                        log += " Script: Tree Density Estimator v1.0.0\n"
                         log += " Author: EverydayMapper (OSM)\n"
                         log += "=========================================================================\n\n"
                         
