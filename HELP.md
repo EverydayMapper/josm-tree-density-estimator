@@ -2,7 +2,7 @@
 
 ## Environment & Compatibility
 - **Author:** EverydayMapper (OSM Contributor)
-- **Version:** 1.4.5
+- **Version:** 1.0.0
 - **Verified OS:** - macOS (Sequoia 15.x / 26.2) 
     - Windows 11 (Version 24H2)
 - **JOSM Version:** 19277 or newer (Official or Microsoft Store versions)
