@@ -1,6 +1,6 @@
 # Tree Density Estimator for JOSM
 
-**Version:** 1.4.5  
+**Version:** 1.0.0 
 **Author:** EverydayMapper  
 **License:** MIT  
 
