@@ -1,5 +1,11 @@
 # Release Notes
 
+## [1.4.5] - 2026-01-09
+
+### Fixed
+- **Imagery Guard:** Restored and improved the background imagery check. The script now correctly detects if a visible imagery layer (e.g., Bing, Esri) is active before proceeding.
+- **Error Handling:** Added a warning dialog that triggers if no imagery is detected, preventing "blind" surveys and ensuring the `source` tag is correctly populated.
+
 ## [1.4.4] - 2026-01-08
 
 ### Added
