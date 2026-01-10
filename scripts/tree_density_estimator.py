@@ -281,7 +281,6 @@ def run_analyzer():
                     
                     # 3. GEOMETRIC SNAP: 
                     # Re-calculate exact corner coordinates based on the rounded meters.
-                    # This ensures the mathematical area matches the visual label perfectly.                                                                        
                     self.sample_area_sqm = final_w * final_h
                     
                     # --- SAFETY GUARD: PREVENT 0x0m BOX ---
@@ -484,12 +483,13 @@ def run_analyzer():
                         else "scattered"
                     )
 
+                    # --- TAGGING (Plain Numbers for Metric values) ---
                     final_tags = {
                         "wood:density": density_class,
                         "canopy": str(canopy_pc) + "%",
                         "est:stem_count": str(est_total),
-                        "est:avg_{}".format(tag_suffix): "{:.1f}m".format(tool.avg_diameter),
-                        "est:avg_spacing": "{:.1f}m".format(avg_spacing),
+                        "est:avg_{}".format(tag_suffix): str(round(tool.avg_diameter, 1)),
+                        "est:avg_spacing": str(round(avg_spacing, 1)),
                         "est:source_area": str(round(total_area, 1)),
                         "source": source_tag_val,
                     }
