@@ -15,7 +15,7 @@ It uses a **sampling and extrapolation** method: measure a small representative 
 The script has been rigorously tested to ensure cross-platform parity and stability.
 
 * **Verified Operating Systems:** macOS (Sequoia 15.x / 26.2) and Windows 11 (Version 24H2).
-* **JOSM Version:** v19277 or newer (supports both Official and Microsoft Store versions).
+* **Verified JOSM Version:** v19439.
 * **Host Runtime:** Java 21 (macOS Bundled) or Java 17+.
 * **Scripting Engine:** Jython Standalone v2.7.4 (Unified version for both OS).
 * **Zero-Config Ready:** The script utilizes JOSM's internal Java runtime; no system-wide Java PATH configuration is required.
