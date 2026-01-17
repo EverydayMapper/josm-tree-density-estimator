@@ -562,7 +562,7 @@ def run_analyzer():
                         
                         # --- LOG GENERATION ---
                         import datetime
-                        timestamp_str = str(int(time.time()))
+                        timestamp_str = datetime.datetime.now().strftime("%Y%m%d_%H%M")
 
                         log = "=========================================================================\n"
                         log += " TREE DENSITY SURVEY LOG\n"
@@ -598,7 +598,7 @@ def run_analyzer():
                         # Log Save Prompt
                         if JOptionPane.showConfirmDialog(None, "Save log to text file?", "Save Log", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION:
                             fc = JFileChooser()
-                            fc.setSelectedFile(java.io.File("TreeSurvey_{}_{}.txt".format(target_id, timestamp_str)))
+                            fc.setSelectedFile(java.io.File("TreeSurvey_ID{}_{}.txt".format(target_id, timestamp_str)))
                             if fc.showSaveDialog(None) == JFileChooser.APPROVE_OPTION:
                                 with open(fc.getSelectedFile().getAbsolutePath(), "w") as f:
                                     f.write(log)
